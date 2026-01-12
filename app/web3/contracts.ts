@@ -1,4 +1,3 @@
-// Contract addresses on BSC Testnet
 export const CONTRACTS = {
   PRESALE: "0x18Cf704fAE6a091Ca736F008f6bF892EC0eCd087",
   WAVE: "0x4bfe42d77EeFA812ECa0C9f0694c687B73b07259",
@@ -6,7 +5,6 @@ export const CONTRACTS = {
   USDC: "0x9967B7d870634CcEbc577E126c4C1a01345564A0",
 } as const;
 
-// Token decimals
 export const DECIMALS = {
   USDT: 6,
   USDC: 6,
