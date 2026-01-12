@@ -9,36 +9,32 @@ interface StatsCardsProps {
 
 export default function StatsCards({ maxSupply, tgePercent, loadingSupply, loadingTGE }: StatsCardsProps) {
   return (
-    <>
-      <div className="bg-gradient-to-br from-blue-950/40 to-blue-900/20 backdrop-blur-sm border border-[#00D2FF33]  p-8 shadow-xl">
+    <div className="flex flex-col gap-6">
+      <div className="bg-[#0F172AB2]/80 to-[#00D2FF33] backdrop-blur-xl border border-blue-500/20 p-10  shadow-2xl transition-all hover:border-blue-500/40">
         <div className="text-center">
-          <p className="text-lg text-[#2171E6] font-medium mb-4 tracking-wider">MAX SUPPLY</p>
-          <div className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-[#E2E8F0] mb-2">
+          <p className="text-lg text-[#2171E6] font-bold mb-6 tracking-[0.2em] uppercase">MAX SUPPLY</p>
+          <div className="text-5xl font-bold text-white font-[JetBrains Mono] text-[#2171E6] tracking-tighter">
             {loadingSupply ? (
               <span className="animate-pulse">...</span>
             ) : (
               `${parseFloat(parseFloat(maxSupply).toFixed(1)).toLocaleString()}M`
             )}
           </div>
-          <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto rounded-full mt-4" />
         </div>
       </div>
 
-      <div className="bg-gradient-to-br from-blue-950/40 to-blue-900/20 backdrop-blur-sm border border-[#00D2FF33]  p-8 shadow-xl">
+      <div className="bg-[#0F172AB2]/80 to-[#00D2FF33] backdrop-blur-xl border border-blue-500/20 p-10  shadow-2xl transition-all hover:border-blue-500/40">
         <div className="text-center">
-          <p className="text-lg text-[#2171E6] font-medium mb-4 tracking-wider">TGE UNLOCK</p>
-          <div className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-[#2171E6] mb-2">
+          <p className="text-lg text-[#2171E6] font-bold mb-6 tracking-[0.2em] uppercase">TGE UNLOCK</p>
+          <div className="text-5xl font-bold font-[JetBrains Mono] text-[#2171E6] tracking-tighter">
             {loadingTGE ? (
               <span className="animate-pulse">...</span>
             ) : (
-              `${tgePercent}%`
+              `${tgePercent}.0%`
             )}
           </div>
-        
         </div>
       </div>
-
-      
-    </>
+    </div>
   );
 }

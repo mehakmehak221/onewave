@@ -3,7 +3,7 @@
 @font-face {
   font-family: 'Gilmer';
   src: url('/fonts/Gilmer_Font/Gilmer Regular.woff2') format('woff2'),
-       url('/fonts/Gilmer_Font/Gilmer Regular.otf') format('opentype');
+    url('/fonts/Gilmer_Font/Gilmer Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -12,7 +12,7 @@
 @font-face {
   font-family: 'Gilmer';
   src: url('/fonts/Gilmer_Font/Gilmer Light.woff2') format('woff2'),
-       url('/fonts/Gilmer_Font/Gilmer Light.otf') format('opentype');
+    url('/fonts/Gilmer_Font/Gilmer Light.otf') format('opentype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -21,7 +21,7 @@
 @font-face {
   font-family: 'Gilmer';
   src: url('/fonts/Gilmer_Font/Gilmer Medium.woff2') format('woff2'),
-       url('/fonts/Gilmer_Font/Gilmer Medium.otf') format('opentype');
+    url('/fonts/Gilmer_Font/Gilmer Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -30,7 +30,7 @@
 @font-face {
   font-family: 'Gilmer';
   src: url('/fonts/Gilmer_Font/Gilmer Bold.woff2') format('woff2'),
-       url('/fonts/Gilmer_Font/Gilmer Bold.otf') format('opentype');
+    url('/fonts/Gilmer_Font/Gilmer Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -39,7 +39,7 @@
 @font-face {
   font-family: 'Gilmer';
   src: url('/fonts/Gilmer_Font/Gilmer Heavy.woff2') format('woff2'),
-       url('/fonts/Gilmer_Font/Gilmer Heavy.otf') format('opentype');
+    url('/fonts/Gilmer_Font/Gilmer Heavy.otf') format('opentype');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -80,15 +80,32 @@ body {
   box-sizing: border-box;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+
+
 html {
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-20px);
   }

@@ -8,7 +8,6 @@ import WaveTokenABI from "../abis/WaveTokenV2.json";
 import MockUSDTABI from "../abis/MockUSDT.json";
 import MockUSDCABI from "../abis/MockUSDC.json";
 
-// Hook to read total USD raised
 export function useTotalRaised() {
   const { data, isLoading, error } = useReadContract({
     address: CONTRACTS.PRESALE as `0x${string}`,
@@ -23,7 +22,6 @@ export function useTotalRaised() {
   };
 }
 
-// Hook to read max supply
 export function useMaxSupply() {
   const { data, isLoading, error } = useReadContract({
     address: CONTRACTS.WAVE as `0x${string}`,
@@ -38,7 +36,6 @@ export function useMaxSupply() {
   };
 }
 
-// Hook to read TGE percent
 export function useTGEPercent() {
   const { data, isLoading, error } = useReadContract({
     address: CONTRACTS.PRESALE as `0x${string}`,
@@ -53,7 +50,6 @@ export function useTGEPercent() {
   };
 }
 
-// Hook to get user's claimable tokens
 export function useClaimableTokens(userAddress: `0x${string}` | undefined, round: number = 1) {
   const { data: tgeClaimable } = useReadContract({
     address: CONTRACTS.PRESALE as `0x${string}`,
@@ -81,7 +77,6 @@ export function useClaimableTokens(userAddress: `0x${string}` | undefined, round
   };
 }
 
-// Hook to get user's purchase info
 export function useUserPurchaseInfo(userAddress: `0x${string}` | undefined, round: number = 1) {
   const { data, isLoading, error } = useReadContract({
     address: CONTRACTS.PRESALE as `0x${string}`,
@@ -152,7 +147,6 @@ export function usePresaleRoundInfo(round: number = 1) {
     };
   }
 
-  // Contract returns 8 values
   const [
     tokenPrice,
     totalAllocation,
@@ -202,8 +196,33 @@ export function useApproveToken(tokenAddress: `0x${string}`, tokenType: "USDT" |
   };
 }
 
-// Hook to buy tokens with USDT
+
+export function useBuyWithNative() {
+  const { writeContract, data: hash, isPending } = useWriteContract();
+  const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });
+
+  const buy = (amount: string, round: number = 1) => {
+    const amountInWei = parseUnits(amount, 18); 
+
+    writeContract({
+      address: CONTRACTS.PRESALE as `0x${string}`,
+      abi: WavePresaleABI,
+      functionName: "buyWithBNB",
+      args: [BigInt(round)],
+      value: amountInWei,
+    });
+  };
+
+  return {
+    buy,
+    isPending: isPending || isConfirming,
+    isSuccess,
+    hash,
+  };
+}
+
 export function useBuyWithUSDT() {
+
   const { writeContract, data: hash, isPending } = useWriteContract();
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });
 
@@ -226,7 +245,6 @@ export function useBuyWithUSDT() {
   };
 }
 
-// Hook to buy tokens with USDC
 export function useBuyWithUSDC() {
   const { writeContract, data: hash, isPending } = useWriteContract();
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });
@@ -250,7 +268,6 @@ export function useBuyWithUSDC() {
   };
 }
 
-// Hook to claim TGE tokens
 export function useClaimTGE() {
   const { writeContract, data: hash, isPending } = useWriteContract();
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });
@@ -272,7 +289,6 @@ export function useClaimTGE() {
   };
 }
 
-// Hook to claim vested tokens
 export function useClaimVested() {
   const { writeContract, data: hash, isPending } = useWriteContract();
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });
