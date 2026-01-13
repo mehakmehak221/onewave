@@ -86,12 +86,11 @@ export default function BuyTokenSection() {
   }, [selectedToken, isNative]);
 
   const handleApprove = () => {
-    if (!amount || parseFloat(amount) <= 0) return;
     if (isNative) {
       setStep("buy");
       return;
     }
-    approve(amount);
+    approve(); 
   };
 
   const handleBuy = () => {
