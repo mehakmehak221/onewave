@@ -41,9 +41,7 @@ export default function ClaimTokens({ userAddress }: ClaimTokensProps) {
     <div className="bg-[#0F172AB2]/80 to-[#00D2FF33] backdrop-blur-xl border border-[#00D2FF33] p-8  shadow-2xl">
       <div className="flex items-center justify-between mb-8">
         <h2 className="text-xl font-bold text-[#2171E6] font-[Space Grotesk] tracking-wider uppercase">CLAIM YOUR TOKENS</h2>
-        <div className="w-12 h-12  bg-[#00B8DB1A] flex items-center justify-center ">
-          <span className="text-[#2171E6] font-bold text-lg">L1</span>
-        </div>
+      
       </div>
 
       <div className="space-y-6">

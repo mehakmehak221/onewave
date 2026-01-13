@@ -309,3 +309,36 @@ export function useClaimVested() {
     hash,
   };
 }
+
+/**
+ * Calculate the exact token amount for a given payment
+ * @param round 
+ * @param paymentType 
+ * @param paymentAmount 
+ */
+export function useCalculateTokenAmount(
+  round: number = 1,
+  paymentType: 0 | 1 | 2,
+  paymentAmount: string
+) {
+  const decimals = paymentType === 0 ? DECIMALS.BNB : paymentType === 1 ? DECIMALS.USDT : DECIMALS.USDC;
+  const amountInWei = paymentAmount && parseFloat(paymentAmount) > 0 
+    ? parseUnits(paymentAmount, decimals) 
+    : BigInt(0);
+
+  const { data, isLoading, error } = useReadContract({
+    address: CONTRACTS.PRESALE as `0x${string}`,
+    abi: WavePresaleABI,
+    functionName: "calculateTokenAmount",
+    args: [BigInt(round), BigInt(paymentType), amountInWei],
+    query: {
+      enabled: parseFloat(paymentAmount) > 0,
+    },
+  });
+
+  return {
+    tokenAmount: data ? formatUnits(data as bigint, DECIMALS.WAVE) : "0",
+    isLoading,
+    error,
+  };
+}

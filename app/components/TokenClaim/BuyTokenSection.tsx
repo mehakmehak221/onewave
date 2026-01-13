@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useAccount, useBalance } from "wagmi";
-import { useApproveToken, useBuyWithUSDT, useBuyWithUSDC, useBuyWithNative, usePresaleRoundInfo } from "@/app/web3/hooks/usePresale";
+import { useApproveToken, useBuyWithUSDT, useBuyWithUSDC, useBuyWithNative, usePresaleRoundInfo, useCalculateTokenAmount } from "@/app/web3/hooks/usePresale";
 import { CONTRACTS } from "@/app/web3/contracts";
 
 const CHAIN_DATA: Record<string, { tokens: string[] }> = {
@@ -24,6 +24,9 @@ export default function BuyTokenSection() {
   const isNative = ["BNB", "ETH", "POL"].includes(selectedToken);
   const tokenAddress = selectedToken === "USDT" ? CONTRACTS.USDT : selectedToken === "USDC" ? CONTRACTS.USDC : undefined;
 
+ 
+  const paymentType = selectedToken === "USDT" ? 1 : selectedToken === "USDC" ? 2 : 0;
+
   const { data: balanceData } = useBalance({
     address,
     token: isNative ? undefined : (tokenAddress as `0x${string}`),
@@ -36,6 +39,13 @@ export default function BuyTokenSection() {
 
   const { tokenPrice, isLoading: loadingPrice } = usePresaleRoundInfo(1);
 
+  
+  const { tokenAmount: calculatedTokens, isLoading: isCalculating } = useCalculateTokenAmount(
+    1, 
+    paymentType as 0 | 1 | 2,
+    amount || "0"
+  );
+
   const { buy: buyWithUSDT, isPending: isBuyingUSDT, isSuccess: buySuccessUSDT } = useBuyWithUSDT();
   const { buy: buyWithUSDC, isPending: isBuyingUSDC, isSuccess: buySuccessUSDC } = useBuyWithUSDC();
   const { buy: buyWithNative, isPending: isBuyingNative, isSuccess: buySuccessNative } = useBuyWithNative();
@@ -43,15 +53,14 @@ export default function BuyTokenSection() {
   const isBuying = isBuyingUSDT || isBuyingUSDC || isBuyingNative;
   const buySuccess = buySuccessUSDT || buySuccessUSDC || buySuccessNative;
 
+ 
   useEffect(() => {
-    if (amount && !isNaN(parseFloat(amount)) && tokenPrice && parseFloat(tokenPrice) > 0) {
-      
-      const calculatedTokens = parseFloat(amount) / parseFloat(tokenPrice);
-      setTokensToReceive(calculatedTokens.toLocaleString(undefined, { maximumFractionDigits: 2 }));
+    if (calculatedTokens && parseFloat(calculatedTokens) > 0) {
+      setTokensToReceive(parseFloat(calculatedTokens).toLocaleString(undefined, { maximumFractionDigits: 2 }));
     } else {
       setTokensToReceive("0");
     }
-  }, [amount, tokenPrice]);
+  }, [calculatedTokens]);
 
   useEffect(() => {
     if (approveSuccess) {
