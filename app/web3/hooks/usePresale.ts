@@ -1,7 +1,7 @@
 "use client";
 
 import { useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
-import { parseUnits, formatUnits } from "viem";
+import { parseUnits, formatUnits, maxUint256 } from "viem";
 import { CONTRACTS, DECIMALS } from "../contracts";
 import WavePresaleABI from "../abis/WavePresale.json";
 import WaveTokenABI from "../abis/WaveTokenV2.json";
@@ -176,15 +176,12 @@ export function useApproveToken(tokenAddress: `0x${string}`, tokenType: "USDT" |
   const { writeContract, data: hash, isPending } = useWriteContract();
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });
 
-  const approve = (amount: string) => {
-    const decimals = DECIMALS[tokenType];
-    const amountInWei = parseUnits(amount, decimals);
-
+  const approve = () => {
     writeContract({
       address: tokenAddress,
       abi: tokenType === "USDT" ? MockUSDTABI : MockUSDCABI,
       functionName: "approve",
-      args: [CONTRACTS.PRESALE, amountInWei],
+      args: [CONTRACTS.PRESALE, maxUint256],
     });
   };
 
