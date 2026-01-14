@@ -40,7 +40,7 @@ const WaveCommunity: React.FC = () => {
             }}
           >
             <h1 className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-4 sm:mb-6 leading-tight">
-              Join the Wave: Be Part of the Decentralized Revoluion
+              Join the Wave: Be Part of the Decentralized Revolution
             </h1>
 
             <p className="text-white text-sm sm:text-base md:text-lg lg:text-xl text-center mb-6 sm:mb-8 lg:mb-10 font-normal">
