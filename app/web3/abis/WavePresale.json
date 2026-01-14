@@ -2,6 +2,96 @@
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "round",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address[]",
+				"name": "buyers",
+				"type": "address[]"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "tokenAmounts",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tgePercent",
+				"type": "uint256"
+			}
+		],
+		"name": "addCrossChainBuyers",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "round",
+				"type": "uint256"
+			}
+		],
+		"name": "buyWithBNB",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "round",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "usdcAmount",
+				"type": "uint256"
+			}
+		],
+		"name": "buyWithUSDC",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "round",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "usdtAmount",
+				"type": "uint256"
+			}
+		],
+		"name": "buyWithUSDT",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "round",
+				"type": "uint256"
+			}
+		],
+		"name": "cliffClaim",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "_waveToken",
 				"type": "address"
@@ -34,19 +124,6 @@
 		],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "bool",
-				"name": "enabled",
-				"type": "bool"
-			}
-		],
-		"name": "AutoWithdrawStatusChanged",
-		"type": "event"
 	},
 	{
 		"anonymous": false,
@@ -102,25 +179,6 @@
 			}
 		],
 		"name": "CliffTimeSet",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "round",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "count",
-				"type": "uint256"
-			}
-		],
-		"name": "CrossChainBuyersAdded",
 		"type": "event"
 	},
 	{
@@ -218,29 +276,79 @@
 		"type": "event"
 	},
 	{
-		"anonymous": false,
 		"inputs": [
 			{
-				"indexed": true,
 				"internalType": "uint256",
 				"name": "round",
 				"type": "uint256"
 			},
 			{
-				"indexed": false,
 				"internalType": "uint256",
-				"name": "newPrice",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "newAllocation",
+				"name": "cliffDuration",
 				"type": "uint256"
 			}
 		],
-		"name": "RoundUpdated",
-		"type": "event"
+		"name": "setCliffTime",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "round",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tgeTime",
+				"type": "uint256"
+			}
+		],
+		"name": "setRoundTGETime",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "round",
+				"type": "uint256"
+			}
+		],
+		"name": "startPresaleRound",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "round",
+				"type": "uint256"
+			}
+		],
+		"name": "stopPresaleRound",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "round",
+				"type": "uint256"
+			}
+		],
+		"name": "tgeClaim",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"anonymous": false,
@@ -342,102 +450,39 @@
 		"type": "event"
 	},
 	{
-		"inputs": [],
-		"name": "CLIFF_INTERVAL",
-		"outputs": [
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "token",
+				"type": "address"
+			},
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "amount",
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "ROUND_1",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "ROUND_2",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "ROUND_3",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
+		"name": "withdraw",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "round",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address[]",
-				"name": "buyers",
-				"type": "address[]"
-			},
-			{
-				"internalType": "uint256[]",
-				"name": "tokenAmounts",
-				"type": "uint256[]"
-			},
-			{
-				"internalType": "uint256",
-				"name": "tgePercent",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "cliffPercent",
+				"name": "fundType",
 				"type": "uint256"
 			}
 		],
-		"name": "addCrossChainBuyers",
+		"name": "withdrawFunds",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "autoWithdrawEnabled",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
+		"stateMutability": "payable",
+		"type": "receive"
 	},
 	{
 		"inputs": [],
@@ -450,55 +495,6 @@
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "round",
-				"type": "uint256"
-			}
-		],
-		"name": "buyWithBNB",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "round",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "usdcAmount",
-				"type": "uint256"
-			}
-		],
-		"name": "buyWithUSDC",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "round",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "usdtAmount",
-				"type": "uint256"
-			}
-		],
-		"name": "buyWithUSDT",
-		"outputs": [],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -531,51 +527,12 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "round",
-				"type": "uint256"
-			}
-		],
-		"name": "cliffClaim",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "crossChainBuyers",
+		"inputs": [],
+		"name": "CLIFF_INTERVAL",
 		"outputs": [
 			{
-				"internalType": "address",
-				"name": "buyerAddress",
-				"type": "address"
-			},
-			{
 				"internalType": "uint256",
-				"name": "tokenAmount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "tgePercent",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "cliffPercent",
+				"name": "",
 				"type": "uint256"
 			}
 		],
@@ -607,43 +564,48 @@
 		"outputs": [
 			{
 				"internalType": "uint256",
-				"name": "tokenPrice",
+				"name": "",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "totalAllocation",
+				"name": "",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "soldAmount",
+				"name": "",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "startTime",
+				"name": "",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "endTime",
+				"name": "",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "tgeTime",
+				"name": "",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "tgePercent",
+				"name": "",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "cliffDuration",
+				"name": "",
 				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -690,38 +652,12 @@
 	},
 	{
 		"inputs": [],
-		"name": "getUSDCAddress",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "getUSDCPrice",
 		"outputs": [
 			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getUSDTAddress",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
 			}
 		],
 		"stateMutability": "view",
@@ -757,37 +693,32 @@
 		"outputs": [
 			{
 				"internalType": "uint256",
-				"name": "totalTokens",
+				"name": "",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "claimedTGE",
+				"name": "",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "claimedCliff",
+				"name": "",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "lastClaimTime",
+				"name": "",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "remainingAmount",
+				"name": "",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "customTGEPercent",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "customCliffPercent",
+				"name": "",
 				"type": "uint256"
 			}
 		],
@@ -856,102 +787,53 @@
 				"internalType": "uint256",
 				"name": "cliffDuration",
 				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "isActive",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [
+		"inputs": [],
+		"name": "ROUND_1",
+		"outputs": [
 			{
-				"internalType": "bool",
-				"name": "enabled",
-				"type": "bool"
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
-		"name": "setAutoWithdraw",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [
+		"inputs": [],
+		"name": "ROUND_2",
+		"outputs": [
 			{
 				"internalType": "uint256",
-				"name": "round",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "cliffDuration",
+				"name": "",
 				"type": "uint256"
 			}
 		],
-		"name": "setCliffTime",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [
+		"inputs": [],
+		"name": "ROUND_3",
+		"outputs": [
 			{
 				"internalType": "uint256",
-				"name": "round",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "tgeTime",
+				"name": "",
 				"type": "uint256"
 			}
 		],
-		"name": "setRoundTGETime",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "round",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "startTime",
-				"type": "uint256"
-			}
-		],
-		"name": "startPresaleRound",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "round",
-				"type": "uint256"
-			}
-		],
-		"name": "stopPresaleRound",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "round",
-				"type": "uint256"
-			}
-		],
-		"name": "tgeClaim",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -982,19 +864,6 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalUSDRaised",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "totalUSDTRaised",
 		"outputs": [
 			{
@@ -1004,29 +873,6 @@
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "round",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "newPrice",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "newAllocation",
-				"type": "uint256"
-			}
-		],
-		"name": "updateRoundParams",
-		"outputs": [],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -1125,11 +971,6 @@
 				"internalType": "uint256",
 				"name": "customTGEPercent",
 				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "customCliffPercent",
-				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -1195,40 +1036,5 @@
 		],
 		"stateMutability": "view",
 		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "token",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "withdraw",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "fundType",
-				"type": "uint256"
-			}
-		],
-		"name": "withdrawFunds",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"stateMutability": "payable",
-		"type": "receive"
 	}
 ]
